@@ -10,7 +10,6 @@ library.add(faTimes, faCircle, faCheckCircle);
 
 const Task = (props) => {
    const [editable, setEditable] = useState(false);
-   // const [completed, toggleCompleted] = useContext(false);  
    const {
       id
       , completed = ""
@@ -58,7 +57,13 @@ const Task = (props) => {
    const taskCreated = created ? `Vytvořen: ${created}`: "?";
    const taskCompleted = completed ? `, Ukončen: ${completed}`: "";
    const taskTitle = `${taskCreated} ${taskCompleted} - Kliknutím upravte text `;
-   const taskName = editable ? taskNameInput : <span title={taskTitle} onClick={click} className={`${completed?css.taskCompleted:""} ${css.pointer}`}>{title}</span>;
+   const taskName = editable ? taskNameInput : <span 
+      title={taskTitle} 
+      onClick={click} 
+      className={`${completed?css.taskCompleted:""} ${css.pointer}`}
+   >
+      {title}
+   </span>;
    return (
       <li className={css.taskItem}>
          <span>
