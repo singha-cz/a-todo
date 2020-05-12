@@ -16,6 +16,7 @@
     left: 0;
     top: 0;
     display: none;
+    border-radius: inherit;
   }
   
   .btn:hover:before{
@@ -42,4 +43,8 @@
 
   .btnLink:hover:before{
     display: none
+  }
+
+  .circle{
+    border-radius: 50%;
   }

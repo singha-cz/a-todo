@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './Button.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function App(props) {
    const {
@@ -8,8 +9,10 @@ function App(props) {
       , outline = false
       , link
       , children
-      , title=""
-      , color="primary"
+      , title = ""
+      , color = "primary"
+      , icon = false
+      , circle = false
    } = props || {};
 
    return (
@@ -17,8 +20,12 @@ function App(props) {
          onClick={onClick} 
          disabled={disabled} 
          title={title}
-         className={`${css.btn} ${color?css[`btn-${color}`]:""} ${outline?css.btnOutline:""}  ${link?css.btnLink:""}`}
+         className={`${css.btn} ${color?css[`btn-${color}`]:""} ${outline?css.btnOutline:""}  ${link?css.btnLink:""} ${circle?css.circle:""}`}
       >
+         {
+            icon &&
+            <FontAwesomeIcon icon={icon} />
+         }
          {children}
       </button>
    );

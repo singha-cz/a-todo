@@ -1,0 +1,15 @@
+.floatRight{
+    float: left;
+}
+
+.taskList{
+  padding: 0
+}
+
+.taskList li{
+  margin-bottom: 0.3rem;
+}
+
+.addButton{
+    margin-left: 1rem;
+}
