@@ -1,2 +1,2 @@
 # a-todo
-React to-do list as a recruitment test project
+React To-do list
