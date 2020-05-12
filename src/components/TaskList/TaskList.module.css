@@ -8,6 +8,9 @@
 
 .taskList li{
   margin-bottom: 0.3rem;
+  border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 0.8rem;
+    padding-top: 0.4rem;
 }
 
 .addButton{
