@@ -1,0 +1,28 @@
+.taskItem{
+   color: #333;
+   list-style: none;
+   padding-left: 1em;
+   font-weight: bold
+}
+.remove{
+   display: none;
+   margin-left: 1rem
+}
+.remove button:hover{
+   color: red !important;
+   background: transparent !important;
+}
+.taskItem:hover .remove{
+   display: inline-block
+}
+.taskCompleted{
+   text-decoration: line-through;
+   color: #777777;
+   font-weight: normal
+}
+.pointer{
+   cursor: pointer;
+}
+.highlight{
+   background: rgb(255, 255, 112);
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 import TaskList from './components/TaskList/TaskList';
 import { TodoContextProvider } from './context/todo.context';
-import './App.css';
+import css from './App.module.scss';
 
 const App = () => {
    return (
-      <div className="App">
+      <div className={css.app}>
          <TodoContextProvider>
             <TaskList />
          </TodoContextProvider>

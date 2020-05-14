@@ -1,8 +1,8 @@
 import React from 'react';
-import css from './Button.module.css';
+import css from './Button.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function App(props) {
+const Button = (props) => {
    const {
       onClick
       , disabled
@@ -31,4 +31,4 @@ function App(props) {
    );
 }
 
-export default App;
+export default Button;
