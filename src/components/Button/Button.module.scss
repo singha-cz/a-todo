@@ -23,13 +23,13 @@
     display: block;
   }
   
-  .btn-primary{
+  .btnPrimary{
     background-color: rgb(4, 91, 190);
     color: white;
   }
   
   .btnOutline{
-    background: transparent !important;
+    background: transparent;
     border: 1px solid #aaa;
     color: #333;
   }
@@ -37,7 +37,7 @@
   .btnLink{
     border: none;
     padding: 0;
-    background: transparent !important;
+    background: transparent;
     color: #333;
   }
 

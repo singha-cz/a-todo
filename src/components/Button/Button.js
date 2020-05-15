@@ -15,12 +15,14 @@ const Button = (props) => {
       , circle = false
    } = props || {};
 
+   const ucfirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
    return (
       <button 
          onClick={onClick} 
          disabled={disabled} 
          title={title}
-         className={`${css.btn} ${color?css[`btn-${color}`]:""} ${outline?css.btnOutline:""}  ${link?css.btnLink:""} ${circle?css.circle:""}`}
+         className={`${css.btn} ${color?css[`btn${ucfirst(color)}`]:""} ${outline?css.btnOutline:""}  ${link?css.btnLink:""} ${circle?css.circle:""}`}
       >
          {
             icon &&

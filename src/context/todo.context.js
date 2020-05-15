@@ -3,13 +3,9 @@ const TodoContext = React.createContext([{}, ()=>{}]);
 
 const TodoContextProvider = (props) => {
    const [state, setState] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
-   // const [editable, setEditable] = useState(false);
-
    useEffect(() => {
       localStorage.setItem('tasks', JSON.stringify(state));
    }, [state]);   
-
-   // const click = (id) => setEditable(id);
 
    const remove = (taskId) => {
       setState([...state.filter(item => item.id !== taskId)]);

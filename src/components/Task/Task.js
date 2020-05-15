@@ -10,7 +10,7 @@ library.add(faTimes, faCircle, faCheckCircle);
 
 const Task = (props) => {
    const [editable, setEditable] = useState(false);
-   const [tasks, handlers] = useContext(TodoContext);
+   const handlers = useContext(TodoContext)[1];
 
    const {
       id
