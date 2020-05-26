@@ -35,7 +35,10 @@ const Task = (props) => {
    const keyUp = (e, id) => {
       const code = e.keyCode;
       if (code === 13) doSave(e, id);
-      if (code === 27) remove(id);
+      if (code === 27) {
+         if (!saved) remove(id);
+            else setEditable(false);
+      }
    }
 
    const handleFocus = (e) => e.target.select();
