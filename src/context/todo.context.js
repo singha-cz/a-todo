@@ -3,6 +3,8 @@ const TodoContext = React.createContext([{}, ()=>{}]);
 
 const TodoContextProvider = (props) => {
    const [state, setState] = useState(JSON.parse(localStorage.getItem('tasks')) || []);
+   const [filter, setFilter] = useState("all");
+
    useEffect(() => {
       localStorage.setItem('tasks', JSON.stringify(state));
    }, [state]);   
@@ -29,6 +31,7 @@ const TodoContextProvider = (props) => {
          , id: now
       };
       setState([...state, newTask]);
+      setFilter("all")
    }
 
    const save = (taskId, title) => {
@@ -42,14 +45,19 @@ const TodoContextProvider = (props) => {
       setState(newTasks);
    }
 
+   const doFilter = (f) => {
+      setFilter(f);
+   }
+
    return (
       <TodoContext.Provider value={[state, {
          setState: setState, 
          remove: remove, 
          complete: complete, 
          addTask: addTask, 
-         save: save
-      }
+         save: save,
+         doFilter: doFilter
+      }, filter
       ]}>
          {props.children}
       </TodoContext.Provider>

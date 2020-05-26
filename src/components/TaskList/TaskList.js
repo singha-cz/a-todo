@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Task from '../Task/Task';
+import Filters from '../../components/Filters/Filters';
 import { TodoContext } from '../../context/todo.context';
 import Button from '../../components/Button/Button';
 import css from './TaskList.module.scss';
@@ -9,7 +10,7 @@ library.add(faPlus);
 
 const TaskList = () => {
    const [search, setSearch] = useState();
-   const [tasks, handlers] = useContext(TodoContext);
+   const [tasks, handlers, filter] = useContext(TodoContext);
    const {
       addTask
    } = handlers || {};
@@ -23,21 +24,45 @@ const TaskList = () => {
    }) : tasks;
 
 
-   const taskCount = searchedTasks.length;
-   const taskList = searchedTasks.length > 0 ? searchedTasks.map(item => <Task {...item} key={item.id} />) : [];
+   const filterTasks = (f, tasks) => {
+      let ft = [];
+      switch(f){
+         case "all": {
+            ft = tasks;
+            break;
+         }
+         case "active": {
+            ft = tasks.filter(item => !item.completed)
+            break;
+         }
+         case "completed": {
+            ft = tasks.filter(item => item.completed)
+            break;
+         }
+         default: {
+            ft = tasks
+         }
+      }
+      return ft;
+   }
+   const filteredTasks = filterTasks(filter, searchedTasks);
+
+   const taskCount = filteredTasks.length;
+   const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} />) : [];
 
    const unfinished = tasks.filter(item => !item.completed);
-   const announcement = unfinished.length > 0 ? `Zbývá ještě udělat (${unfinished.length}):` : <>Všechno hotovo, <strong>gratulki!</strong></>;
+   // const announcement = unfinished.length > 0 ? `Remaining tasks (${unfinished.length}):` : <>All done, <strong>congrats!</strong></>;
+   const announcement = unfinished.length > 0 ? "": <>All done, <strong>congrats!</strong></>;
    return (
       <>
          <h3>
-            Seznam úkolů
+            Task list
             {
                taskCount > 0 &&
                <span> ({taskCount})</span>
             }
             <span className={css.addButton}>
-               <Button color="primary" circle onClick={addTask} icon="plus" title="Přidat úkol"></Button>
+               <Button color="primary" circle onClick={addTask} icon="plus" title="Add task"></Button>
             </span>
          </h3>
          {
@@ -46,13 +71,14 @@ const TaskList = () => {
                type="text"
                name="search"
                value={search ? search : ""}
-               placeholder="Hledat úkol…"
+               placeholder="Search tasks…"
                className="form-control"
                onChange={(e) => setSearch(e.target.value)}
                onKeyUp={keyUp}
-               title={"Vyhledávejte/filtrujte úkoly dle názvu. Stisknutím Esc se filtr zruší."}
+               title={"Search/filter tasks by title. Click Esc to remove the filter."}
             />
          }
+         <Filters />
          <p>
             {
                taskCount > 0 &&
@@ -61,8 +87,8 @@ const TaskList = () => {
          </p>
          <div>
             {
-               searchedTasks.length < 1 &&
-               <p><em>-- Nenašel jsem žádný úkol --</em></p>
+               filteredTasks.length < 1 &&
+               <p><em>-- No task found --</em></p>
             }
             <ul className={css.taskList}>
                {taskList}

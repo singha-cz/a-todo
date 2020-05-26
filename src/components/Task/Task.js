@@ -54,9 +54,9 @@ const Task = (props) => {
       />;
 
       const timeCompleted = completed? new Date(completed): "";
-      const taskCompleted = completed ? `, Ukončen: ${timeCompleted.toLocaleString()}` : "";
+      const taskCompleted = completed ? `, Completed: ${timeCompleted.toLocaleString()}` : "";
       const taskCreated = new Date(created);
-      const taskTitle = `Vytvořen: ${taskCreated.toLocaleString()} ${taskCompleted} - Kliknutím upravte text `;
+      const taskTitle = `Created: ${taskCreated.toLocaleString()} ${taskCompleted} - Click to edit `;
 
       return  editable || !saved ? taskNameInput : <span
          title={taskTitle}
@@ -70,11 +70,11 @@ const Task = (props) => {
    return (
       <li className={css.taskItem}>
          <span>
-            <Button link onClick={() => complete(id)} title={completed ? "Zrušit označení hotového úkolu" : "Označit jako hotový"}>
+            <Button link onClick={() => complete(id)} title={completed ? "Mark incompleted" : "Mark completed"}>
                <FontAwesomeIcon color={completed ? "#007022" : ""} size="lg" icon={["far", completed ? "check-circle" : "circle"]} />
             </Button> <TaskName editable={editable} />
          </span> <span className={css.remove}>
-            <Button title="Smazat" link onClick={() => remove(id)} icon={"times"} />
+            <Button title="Delete" link onClick={() => remove(id)} icon={"times"} />
          </span>
       </li>
    );
