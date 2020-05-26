@@ -78,7 +78,10 @@ const TaskList = () => {
                title={"Search/filter tasks by title. Click Esc to remove the filter."}
             />
          }
-         <Filters />
+         {
+            tasks.filter(item => item.saved).length > 0 &&
+            <Filters />
+         }
          <p>
             {
                taskCount > 0 &&
@@ -88,7 +91,7 @@ const TaskList = () => {
          <div>
             {
                filteredTasks.length < 1 &&
-               <p><em>-- No task found --</em></p>
+               <p><em>-- No tasks found --</em></p>
             }
             <ul className={css.taskList}>
                {taskList}

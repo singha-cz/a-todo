@@ -6,7 +6,6 @@ import css from './Filters.module.scss';
 const Filters = () => {
     const [tasks, handlers, filter] = useContext(TodoContext);
     const {doFilter} = handlers || {};
-    console.log(filter)
     return <div className={css.filters}>
         <Button color={filter==="all"?"dark":"secondary"} onClick={()=>doFilter("all")}>
             All
