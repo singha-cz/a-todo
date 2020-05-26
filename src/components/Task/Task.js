@@ -11,7 +11,6 @@ library.add(faTimes, faCircle, faCheckCircle);
 const Task = (props) => {
    const [editable, setEditable] = useState(false);
    const handlers = useContext(TodoContext)[1];
-
    const {
       id
       , completed = ""
@@ -36,7 +35,7 @@ const Task = (props) => {
    const keyUp = (e, id) => {
       const code = e.keyCode;
       if (code === 13) doSave(e, id);
-      if (code === 27) setEditable(false);
+      if (code === 27) remove(id);
    }
 
    const handleFocus = (e) => e.target.select();
@@ -57,7 +56,6 @@ const Task = (props) => {
       const taskCompleted = completed ? `, Completed: ${timeCompleted.toLocaleString()}` : "";
       const taskCreated = new Date(created);
       const taskTitle = `Created: ${taskCreated.toLocaleString()} ${taskCompleted} - Click to edit `;
-
       return  editable || !saved ? taskNameInput : <span
          title={taskTitle}
          onClick={click}
