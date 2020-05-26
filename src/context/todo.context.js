@@ -26,7 +26,7 @@ const TodoContextProvider = (props) => {
    const addTask = (e) => {
       const now = Date.now();       
       const newTask = {
-         title: `Nový úkol`
+         title: `New Task`
          , created: now
          , id: now
       };
@@ -37,7 +37,7 @@ const TodoContextProvider = (props) => {
    const save = (taskId, title) => {
       const newTasks = state.map(item => {
          if (item.id === taskId) {
-            item.title = title || "-- úkol bez názvu :/ --";
+            item.title = title || "-- no-name task :/ --";
             item.saved = true;
          }
          return item;
