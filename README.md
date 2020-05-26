@@ -2,9 +2,10 @@
 A simple React To-do list app based on React.js functional components and Context API
 
 # Features
-- Full task management - Add/Remove/Edit/Search/Filter
+- Full task management - Add/Remove/Edit/Search/Filter/Mark complete
 - Uses LocalStorage
 - Keyboard support (Esc, Enter)
 - UX mindful
+
 # Demo
 https://singha-cz.github.io/a-todo/
