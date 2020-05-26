@@ -17,4 +17,17 @@
    .inline-block{
       display: inline-block;
    }
+   .py-0{
+      padding-top: 0; 
+      padding-bottom: 0;
+   }
+   .m-0{
+      margin: 0
+   }
+   .bg-none{
+      background: transparent
+   }
+   .border-0{
+      border: none
+   }
 }

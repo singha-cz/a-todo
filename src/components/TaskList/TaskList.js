@@ -5,8 +5,9 @@ import { TodoContext } from '../../context/todo.context';
 import Button from '../../components/Button/Button';
 import css from './TaskList.module.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-library.add(faPlus);
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+library.add(faPlus, faSearch);
 
 const TaskList = () => {
    const [search, setSearch] = useState();
@@ -51,8 +52,8 @@ const TaskList = () => {
    const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} />) : [];
 
    const unfinished = tasks.filter(item => !item.completed);
-   // const announcement = unfinished.length > 0 ? `Remaining tasks (${unfinished.length}):` : <>All done, <strong>congrats!</strong></>;
    const announcement = unfinished.length > 0 ? "": <>All done, <strong>congrats!</strong></>;
+
    return (
       <>
          <h3>
@@ -67,16 +68,19 @@ const TaskList = () => {
          </h3>
          {
             tasks.length > 0 &&
-            <input
-               type="text"
-               name="search"
-               value={search ? search : ""}
-               placeholder="Search tasks…"
-               className="form-control"
-               onChange={(e) => setSearch(e.target.value)}
-               onKeyUp={keyUp}
-               title={"Search/filter tasks by title. Click Esc to remove the filter."}
-            />
+            <div className={css.searchBox}>
+               <input
+                  type="text"
+                  name="search"
+                  value={search ? search : ""}
+                  placeholder="Search tasks…"
+                  className="form-control"
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyUp={keyUp}
+                  title={"Search/filter tasks by title. Click Esc to remove the filter."}
+               />
+               <FontAwesomeIcon icon="search" color="silver" className={css.searchButton} />
+            </div>
          }
          {
             tasks.filter(item => item.saved).length > 0 &&
