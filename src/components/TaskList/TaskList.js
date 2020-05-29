@@ -80,7 +80,7 @@ const TaskList = () => {
                   name="search"
                   value={search ? search : ""}
                   placeholder="Search tasks…"
-                  className="form-control"
+                  className="form-control border-box w-100"
                   onChange={(e) => setSearch(e.target.value)}
                   onKeyUp={keyUp}
                   title={"Search/filter tasks by title. Click Esc to remove the filter."}

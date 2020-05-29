@@ -18,6 +18,10 @@
     display: none;
     border-radius: inherit;
   }
+  .btn:focus{
+    outline: 0;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.2)
+  }
   
   .btn:hover:before{
     display: block;
