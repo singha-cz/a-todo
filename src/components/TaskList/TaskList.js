@@ -3,6 +3,7 @@ import Task from '../Task/Task';
 import Filters from '../../components/Filters/Filters';
 import { TodoContext } from '../../context/todo.context';
 import Button from '../../components/Button/Button';
+import Progress from '../../components/Progress/Progress';
 import css from './TaskList.module.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -54,8 +55,13 @@ const TaskList = () => {
    const unfinished = tasks.filter(item => !item.completed);
    const announcement = unfinished.length > 0 ? "": <>All done, <strong>congrats!</strong></>;
 
+   const savedTasks = tasks.filter(item => item.saved).length;
    return (
       <>
+         {
+            savedTasks > 0 &&
+            <Progress/>
+         }
          <h3>
             Task list
             {
@@ -67,7 +73,7 @@ const TaskList = () => {
             </span>
          </h3>
          {
-            tasks.length > 0 &&
+            savedTasks > 1 &&
             <div className={css.searchBox}>
                <input
                   type="text"
@@ -83,7 +89,7 @@ const TaskList = () => {
             </div>
          }
          {
-            tasks.filter(item => item.saved).length > 0 &&
+            savedTasks > 1 &&
             <Filters />
          }
          <p>
