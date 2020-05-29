@@ -13,9 +13,12 @@ const Button = (props) => {
       , color = "primary"
       , icon = false
       , circle = false
+      , active = false
    } = props || {};
 
    const ucfirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const childElement = active? <strong>{children}</strong>: children;
 
    return (
       <button 
@@ -28,7 +31,7 @@ const Button = (props) => {
             icon &&
             <FontAwesomeIcon icon={icon} />
          }
-         {children}
+         {childElement}
       </button>
    );
 }
