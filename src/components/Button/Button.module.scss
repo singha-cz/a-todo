@@ -1,10 +1,13 @@
+@import "../../theme.scss";
+
 .btn{
     padding: 0.55rem 0.65rem;
     border-radius: 4px;  
     border: none;
-    cursor: pointer;
     position: relative;
     font-size: 11pt;
+    display: inline-block;
+    cursor: pointer;
   }
   
   .btn:before{
@@ -28,7 +31,7 @@
   }
   
   .btnPrimary{
-    background-color: rgb(4, 91, 190);
+    background-color: $primary;
     color: white;
   }
   .btnSecondary{
@@ -43,7 +46,7 @@
   
   .btnOutline{
     background: transparent;
-    border: 1px solid #ccc;
+    border: 1px solid #e7e7e7;
     color: #333;
   }
 
@@ -60,4 +63,9 @@
 
   .circle{
     border-radius: 50%;
+    @include soft-button;    
+    background-color: lighten($primary, 30%);
+    background-image: linear-gradient(290deg, rgba(0,0,0,0.2), transparent);
+    background-clip: padding-box;
+    border: 3px solid transparent;
   }

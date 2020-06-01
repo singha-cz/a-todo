@@ -12,7 +12,6 @@ const Filters = () => {
     const [tasks, handlers, filter] = useContext(TodoContext);
     const {doFilter} = handlers || {};
     const activeTasks = tasks.filter(item => !item.completed).length;
-    const completedTasks = tasks.length - activeTasks;
 
     return <div className={css.filters}>
         <ButtonGroup>

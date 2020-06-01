@@ -1,8 +1,11 @@
+@import "../../theme.scss";
 .progressBarContainer{
    background: #eee;
+   @include soft-inset();
+   border-radius: 8px;
+   margin-top: 0.3rem
 }
 .progressBar{
    height: 0.3rem;
-   border-radius: 8px;
-   margin-top: 0.3rem
+   border-radius: inherit;
 }

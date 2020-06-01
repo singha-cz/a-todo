@@ -68,9 +68,7 @@ const TaskList = () => {
                taskCount > 0 &&
                <span> ({taskCount})</span>
             }
-            <span className={css.addButton}>
-               <Button color="primary" circle onClick={addTask} icon="plus" title="Add task"></Button>
-            </span>
+            <Button color="primary" circle onClick={addTask} icon="plus" title="Add task" className={css.addButton}></Button>
          </h3>
          {
             savedTasks > 1 &&
