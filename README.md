@@ -6,7 +6,7 @@ A simple React To-do list app based on React.js functional components and Contex
 - Progress bar
 - Uses LocalStorage
 - Keyboard support (Esc, Enter)
-- UX mindful
+- Soft UI design
 
 # Demo
 https://singha-cz.github.io/a-todo/
