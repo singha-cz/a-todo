@@ -52,8 +52,11 @@ const TaskList = () => {
    const taskCount = filteredTasks.length;
    const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} />) : [];
 
-   const unfinished = tasks.filter(item => !item.completed);
-   const announcement = unfinished.length > 0 ? "": <>All done, <strong>congrats!</strong></>;
+   const activeTasks = tasks.filter(item => !item.completed);
+   const completedTasks = tasks.length - activeTasks.length;
+   const announcement = activeTasks.length > 0 ? "": <>All done, <strong>congrats!</strong></>;
+   const allActive = tasks.length === activeTasks.length;
+   const allCompleted = tasks.length === completedTasks;
 
    const savedTasks = tasks.filter(item => item.saved).length;
    return (
@@ -87,15 +90,15 @@ const TaskList = () => {
             </div>
          }
          {
-            savedTasks > 1 &&
+            savedTasks > 1 && !allCompleted && !allActive &&
             <Filters />
          }
-         <p>
+         {/* <p>
             {
                taskCount > 0 &&
                announcement
             }
-         </p>
+         </p> */}
          <div>
             {
                filteredTasks.length < 1 &&

@@ -11,20 +11,16 @@ const Filters = () => {
     }
     const [tasks, handlers, filter] = useContext(TodoContext);
     const {doFilter} = handlers || {};
-    const activeTasks = tasks.filter(item => !item.completed).length;
-
+    const activeTasks = tasks.filter(item => !item.completed);
     return <div className={css.filters}>
         <ButtonGroup>
             <Button active={filter==="all"} outline color={filter==="all"?"dark":"secondary"} onClick={()=>doFilter("all")}>
                 All tasks
             </Button><Button active={filter==="active"} outline color={filter==="active"?"dark":"secondary"} onClick={()=>doFilter("active")}>
-                Active {
-                    activeTasks > 0 &&
-                    <Badge value={activeTasks} />
-                }
-            </Button><Button active={filter==="completed"} outline color={filter==="completed"?"dark":"secondary"} onClick={()=>doFilter("completed")}>
-                Completed
-            </Button>
+                    Active <Badge value={activeTasks.length} />
+                </Button><Button active={filter==="completed"} outline color={filter==="completed"?"dark":"secondary"} onClick={()=>doFilter("completed")}>
+                    Completed
+                </Button>
         </ButtonGroup>
     </div>
 }
