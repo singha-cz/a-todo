@@ -19,8 +19,6 @@ const Button = (props) => {
 
    const ucfirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const childElement = active? <strong>{children}</strong>: children;
-
    return (
       <button 
          onClick={onClick} 
@@ -40,7 +38,7 @@ const childElement = active? <strong>{children}</strong>: children;
             icon &&
             <FontAwesomeIcon icon={icon} />
          }
-         {childElement}
+         {children}
       </button>
    );
 }

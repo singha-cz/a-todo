@@ -1,3 +1,6 @@
+@import "../../theme.scss";
+:export { primary: $primary; }
+
 .taskItem{
    color: #333;
    list-style: none;

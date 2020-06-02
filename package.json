@@ -36,7 +36,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "node-sass": "^4.14.1",
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "node-sass": "^4.14.1"
   }
 }

@@ -54,7 +54,6 @@ const TaskList = () => {
 
    const activeTasks = tasks.filter(item => !item.completed);
    const completedTasks = tasks.length - activeTasks.length;
-   const announcement = activeTasks.length > 0 ? "": <>All done, <strong>congrats!</strong></>;
    const allActive = tasks.length === activeTasks.length;
    const allCompleted = tasks.length === completedTasks;
 
@@ -93,12 +92,6 @@ const TaskList = () => {
             savedTasks > 1 && !allCompleted && !allActive &&
             <Filters />
          }
-         {/* <p>
-            {
-               taskCount > 0 &&
-               announcement
-            }
-         </p> */}
          <div>
             {
                filteredTasks.length < 1 &&

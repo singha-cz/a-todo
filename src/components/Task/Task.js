@@ -72,7 +72,7 @@ const Task = (props) => {
       <li className={css.taskItem}>
          <span>
             <Button link onClick={() => complete(id)} title={completed ? "Mark incompleted" : "Mark completed"}>
-               <FontAwesomeIcon color={completed ? "#007022" : ""} size="lg" icon={["far", completed ? "check-circle" : "circle"]} />
+               <FontAwesomeIcon color={completed ? css.primary : ""} size="lg" icon={["far", completed ? "check-circle" : "circle"]} />
             </Button> <TaskName editable={editable} />
          </span> <span className={css.remove}>
             <Button title="Delete" link onClick={() => remove(id)} icon={"times"} />

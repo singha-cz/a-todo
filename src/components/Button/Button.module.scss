@@ -70,6 +70,10 @@
     border: 3px solid transparent;
   }
 
-  // .activeButton{
-  //    background-color: aliceblue;
-  // }
+  .activeButton{
+    background-color: saturate(lighten($primary, 58%), 90%);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.08), 0 10px 15px white !important;
+    font-size: 14px;
+    color: rgba(0,0,0,0.4);
+    pointer-events: none;
+  }
