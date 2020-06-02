@@ -1,17 +1,18 @@
 @import "./variables.scss";
+$shadow: darken(saturate($bg-color, 40%), 80%);
 
-@mixin soft-inset($depth: 4px){
-    box-shadow: inset  -1*$depth -1*$depth $depth*1.5 rgba(255,255,255,0.9), inset $depth $depth $depth*1.5 rgba(20,35,93, 0.08);   
-    border: none; 
-    // border: 1px solid rgba(200,200,200,0.5);
-    // border-top-color: rgba(200,200,200,0.5);
-    // border-left-color: rgba(200,200,200,0.5);
- }
- @mixin soft-raised($depth: 10px){
-    box-shadow:  -1*$depth -1*$depth $depth*1.5 #FFFFFF, $depth $depth $depth*1.5 rgba(20,35,93, 0.08);    
-    border: none;
- }
 
- @mixin soft-button(){
-     @include soft-raised;
- }
+@mixin soft-inset($depth: 4px) {
+   box-shadow: inset -1*$depth -1*$depth $depth*1.5 rgba(255, 255, 255, 0.9), inset $depth $depth $depth*1.5 rgba($shadow, 0.08), $depth $depth $depth*1.5 rgba(0,0,0,0.01), -1*$depth -1*$depth $depth*1.5 rgba(255, 255, 255, 0.5);
+   border    : none;
+}
+
+@mixin soft-raised($depth: 10px) {
+   box-shadow: -1*$depth -1*$depth $depth*1.5 rgba(255, 255, 255, 0.8), $depth $depth $depth*1.5 rgba($shadow, 0.08), inset $depth $depth $depth*4 rgba($shadow, 0.04), inset -1*$depth -1*$depth $depth*4 rgba(255, 255, 255, 0.7);
+   border    : none;
+}
+
+@mixin soft-button($depth: 10px) {
+   box-shadow: -1*$depth -1*$depth $depth*1.5 #FFFFFF, $depth $depth $depth*1.5 rgba($shadow, 0.08), inset $depth $depth $depth*1.5 rgba($shadow, 0.02);
+   border    : none;
+}

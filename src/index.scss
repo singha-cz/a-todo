@@ -1,7 +1,9 @@
+@import "./variables.scss";
+
 body {
   margin: 0;
   font-family: "Open sans", Arial, sans-serif;
-  background-color: #F5F5F5;
+  background-color: $bg-color;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

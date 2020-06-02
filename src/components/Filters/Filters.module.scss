@@ -5,7 +5,7 @@
 }
 
 .filterBadge{
-   background: $primary;
+   background: lighten($primary, 30%);
    border-radius: 3px;
    width: 1rem;
    height: 1rem;

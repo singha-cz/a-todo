@@ -33,6 +33,7 @@ const childElement = active? <strong>{children}</strong>: children;
             ${link?css.btnLink:""} 
             ${circle?css.circle:""}
             ${className}
+            ${active?css.activeButton:""}
          `}
       >
          {
