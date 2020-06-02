@@ -20,7 +20,12 @@ const TodoContextProvider = (props) => {
             item.completed = item.completed ? null : now;
          return item;
       });
+      const activeTasks = newTasks.filter(item => !item.completed);
+      const completedTasks = newTasks.length - activeTasks.length;
+      const allActive = activeTasks.length === newTasks.length;
+      const allCompleted = completedTasks === newTasks.length;
       setState(newTasks);
+      if (allActive || allCompleted) setFilter("all");
    }   
 
    const addTask = (e) => {
