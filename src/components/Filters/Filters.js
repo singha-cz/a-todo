@@ -5,35 +5,36 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import css from './Filters.module.scss';
 
 
-const Filters = () => {
+const Filters = (props) => {
    const Badge = ({ value, color }) => {
       return (<span className={css.filterBadge} style={{ backgroundColor: color ? color : "" }}>{value}</span>)
    }
-   const [tasks, handlers, filter] = useContext(TodoContext);
-   const { doFilter } = handlers || {};
+   const toDoLists = useContext(TodoContext)[0];
+   const [filter, doFilter] = props.filters || {};
+   const tasks = toDoLists.find(item => item.id === props.id).tasks;
    const activeTasks = tasks.filter(item => !item.completed);
    return <div className={css.filters}>
       <ButtonGroup>
          <Button 
-            active={filter === "all"} 
+            active={filter === "ALL"} 
             outline 
-            color={filter === "all" ? "dark" : "secondary"} 
-            onClick={() => doFilter("all")}
+            color={filter === "ALL" ? "dark" : "secondary"} 
+            onClick={() => doFilter("ALL")}
          >
             All tasks
             </Button><Button 
-            active={filter === "active"} 
+            active={filter === "ACTIVE"} 
             outline 
-            color={filter === "active" ? "dark" : "secondary"} 
-            onClick={() => doFilter("active")}
+            color={filter === "ACTIVE" ? "dark" : "secondary"} 
+            onClick={() => doFilter("ACTIVE")}
          >
             Active <Badge 
             value={activeTasks.length} />
          </Button><Button 
-            active={filter === "completed"} 
+            active={filter === "COMPLETED"} 
             outline 
-            color={filter === "completed" ? "dark" : "secondary"} 
-            onClick={() => doFilter("completed")}
+            color={filter === "COMPLETED" ? "dark" : "secondary"} 
+            onClick={() => doFilter("COMPLETED")}
          >
             Completed
          </Button>

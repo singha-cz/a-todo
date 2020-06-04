@@ -17,6 +17,7 @@ const Task = (props) => {
       , created = ""
       , title = ""
       , saved = false
+      , toDoListId = null
    } = props || {};
 
    const {
@@ -27,9 +28,9 @@ const Task = (props) => {
 
    const click = () => setEditable(!editable);
 
-   const doSave = (e, id) => {
+   const doSave = (e, id, ) => {
       setEditable(false);
-      save(id, e.target.value);
+      save(id, e.target.value, toDoListId);
    }
 
    const keyUp = (e, id) => {
@@ -71,11 +72,11 @@ const Task = (props) => {
    return (
       <li className={css.taskItem}>
          <span>
-            <Button link onClick={() => complete(id)} title={completed ? "Mark incompleted" : "Mark completed"}>
+            <Button link onClick={() => complete(id, toDoListId)} title={completed ? "Mark incompleted" : "Mark completed"}>
                <FontAwesomeIcon color={completed ? css.primary : ""} size="lg" icon={["far", completed ? "check-circle" : "circle"]} />
             </Button> <TaskName editable={editable} />
          </span> <span className={css.remove}>
-            <Button title="Delete" link onClick={() => remove(id)} icon={"times"} />
+            <Button title="Delete" link onClick={() => remove(id, toDoListId)} icon={"times"} />
          </span>
       </li>
    );

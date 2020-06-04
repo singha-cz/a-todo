@@ -6,13 +6,18 @@ import Button from '../../components/Button/Button';
 import Progress from '../../components/Progress/Progress';
 import css from './TaskList.module.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-library.add(faPlus, faSearch);
+library.add(faPlus, faSearch, faSpinner);
 
-const TaskList = () => {
+const TaskList = (props) => {
    const [search, setSearch] = useState();
-   const [tasks, handlers, filter] = useContext(TodoContext);
+   const [filter, setFilter] = useState('ALL');
+   const [toDoLists, handlers] = useContext(TodoContext);
+
+   // const filter = filters[0];
+   const toDoList = toDoLists.find(item => item.id === props.id);
+   const tasks = toDoList.tasks;
    const {
       addTask
    } = handlers || {};
@@ -20,6 +25,11 @@ const TaskList = () => {
    const keyUp = (e) => {
       if (e.keyCode === 27) setSearch("");
    }
+
+   const doFilter = (f) => {
+      setFilter(f);
+   }
+
 
    const searchedTasks = search ? tasks.filter(item => {
       return item.title.toLowerCase().includes(search.toLowerCase())
@@ -29,20 +39,20 @@ const TaskList = () => {
    const filterTasks = (f, tasks) => {
       let ft = [];
       switch(f){
-         case "all": {
+         case "ALL": {
             ft = tasks;
             break;
          }
-         case "active": {
+         case "ACTIVE": {
             ft = tasks.filter(item => !item.completed)
             break;
          }
-         case "completed": {
+         case "COMPLETED": {
             ft = tasks.filter(item => item.completed)
             break;
          }
          default: {
-            ft = tasks
+            ft = tasks?tasks: []
          }
       }
       return ft;
@@ -50,27 +60,42 @@ const TaskList = () => {
    const filteredTasks = filterTasks(filter, searchedTasks);
 
    const taskCount = filteredTasks.length;
-   const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} />) : [];
+   const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} toDoListId={props.id} />) : [];
 
-   const activeTasks = tasks.filter(item => !item.completed);
-   const completedTasks = tasks.length - activeTasks.length;
-   const allActive = tasks.length === activeTasks.length;
-   const allCompleted = tasks.length === completedTasks;
+   const allActive = tasks.every(item => !item.completed);
+   const allCompleted = tasks.every(item => item.completed);   
 
    const savedTasks = tasks.filter(item => item.saved).length;
+
+   // const postList = posts.length > 0? 
+   // <div>
+   //    <h4>Posts</h4>
+   //    <ul>
+   //       {posts.map(item => <li key={item.id}>{item.title}</li>)}
+   //    </ul>
+   // </div>
+   // : 
+   // <div className="text-center">
+   //    <FontAwesomeIcon icon="spinner" spin /> Loading posts…
+   // </div>
+
    return (
-      <>
+      <section className={css.taskListModule}>
+         {
+            // toDoLists.length > 1 &&
+            <Button color="link" icon="times" className={css.closeButton} onClick={() => handlers.removeToDoList(props.id)} />
+         }
          {
             savedTasks > 0 &&
-            <Progress/>
+            <Progress id={props.id} />
          }
          <h3>
-            Task list
+            {toDoList.title}
             {
                taskCount > 0 &&
                <span> ({taskCount})</span>
             }
-            <Button color="primary" circle onClick={addTask} icon="plus" title="Add task" className={css.addButton}></Button>
+            <Button color="primary" circle onClick={() => addTask(props.id)} icon="plus" title="Add task" className={css.addButton}></Button>
          </h3>
          {
             savedTasks > 1 &&
@@ -90,7 +115,7 @@ const TaskList = () => {
          }
          {
             savedTasks > 1 && !allCompleted && !allActive &&
-            <Filters />
+            <Filters id={props.id} filters={[filter, doFilter]} />
          }
          <div>
             {
@@ -101,7 +126,9 @@ const TaskList = () => {
                {taskList}
             </ul>
          </div>
-      </>
+         {/* {postList} */}
+
+      </section>
    )
 }
 
