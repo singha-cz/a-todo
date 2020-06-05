@@ -11,3 +11,6 @@ A simple React To-do list app based on React.js functional components and Contex
 
 ## Demo
 https://singha-cz.github.io/a-todo/
+
+## Screenshot
+![A-todo screenshot](public/a-todo-screenshot.png?raw=true "A-todo screenshot")
