@@ -1,7 +1,7 @@
 @import "../../theme.scss";
 
 .btn{
-    padding: 0.55rem 0.65rem;
+    padding: 0.6rem 0.8rem;
     border-radius: 8px;  
     border: none;
     position: relative;
@@ -32,8 +32,10 @@
   }
   
   .btnPrimary{
-    background-color: $primary;
+    background-color: lighten($primary, 30%);
     color: white;
+    background-clip: padding-box;
+    border: 3px solid transparent;    
   }
   .btnSecondary{
     background-color: rgb(156, 156, 156);
@@ -63,6 +65,7 @@
   }
 
   .circle{
+    padding: 0.6rem 0.7rem;    
     border-radius: 50%;
     background-color: lighten($primary, 30%);
     background-image: linear-gradient(290deg, rgba(0,0,0,0.2), transparent);

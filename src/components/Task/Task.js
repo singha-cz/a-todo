@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import css from './Task.module.scss';
 import Button from '../Button/Button';
+import TaskName from '../EditableOnClick/EditableOnClick';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCircle, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
@@ -14,9 +15,6 @@ const Task = (props) => {
    const {
       id
       , completed = ""
-      , created = ""
-      , title = ""
-      , saved = false
       , toDoListId = null
    } = props || {};
 
@@ -26,47 +24,9 @@ const Task = (props) => {
       , save = () => { }
    } = handlers || {};
 
-   const click = () => setEditable(!editable);
-
-   const doSave = (e, id, ) => {
+   const doSave = (e, id) => {
       setEditable(false);
       save(id, e.target.value, toDoListId);
-   }
-
-   const keyUp = (e, id) => {
-      const code = e.keyCode;
-      if (code === 13) doSave(e, id);
-      if (code === 27) {
-         if (!saved) remove(id);
-            else setEditable(false);
-      }
-   }
-
-   const handleFocus = (e) => e.target.select();
-   
-   const TaskName = ({editable}) => {
-      const taskNameInput = <input
-         type="text"
-         className="form-control"
-         name="newTitle"
-         defaultValue={title}
-         onBlur={(e) => doSave(e, id)}
-         onKeyUp={(e) => keyUp(e, id)}
-         onFocus={handleFocus}
-         autoFocus
-      />;
-
-      const timeCompleted = completed? new Date(completed): "";
-      const taskCompleted = completed ? `, Completed: ${timeCompleted.toLocaleString()}` : "";
-      const taskCreated = new Date(created);
-      const taskTitle = `Created: ${taskCreated.toLocaleString()} ${taskCompleted} - Click to edit `;
-      return  editable || !saved ? taskNameInput : <span
-         title={taskTitle}
-         onClick={click}
-         className={`${completed ? css.taskCompleted : ""} ${css.pointer}`}
-      >
-         {title}
-      </span>;
    }
 
    return (
@@ -74,7 +34,7 @@ const Task = (props) => {
          <span>
             <Button link onClick={() => complete(id, toDoListId)} title={completed ? "Mark incompleted" : "Mark completed"}>
                <FontAwesomeIcon color={completed ? css.primary : ""} size="lg" icon={["far", completed ? "check-circle" : "circle"]} />
-            </Button> <TaskName editable={editable} />
+            </Button> <TaskName editable={editable} handlers={{remove: remove, doSave: doSave, setEditable: setEditable}} {...props} />
          </span> <span className={css.remove}>
             <Button title="Delete" link onClick={() => remove(id, toDoListId)} icon={"times"} />
          </span>

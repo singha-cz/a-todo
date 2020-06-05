@@ -10,11 +10,23 @@ const Lists = () => {
 }
 
 const ToDoLists = () => {
-   const handlers = useContext(TodoContext)[1];
+   const [toDoLists, handlers] = useContext(TodoContext);
    return <>
-      <Button color="primary" circle icon="plus" onClick={handlers.addToDoList} title="Add new todo list" />
+      <div className={css.addToDoList}>
+         <Button color="primary" circle icon="plus" onClick={handlers.addToDoList} title="Add new todo list" />
+      </div>
       <div className={css.toDoLists}>
          <Lists />
+         {
+            toDoLists.length === 0 && 
+            <div className="text-center mx-auto">
+               <em>-- No to-do lists yet --</em>
+               <p>
+                  <Button color="primary" onClick={handlers.addToDoList}> Create a new one</Button>
+               </p>
+            </div>
+            
+         }
       </div>
    </>
 }

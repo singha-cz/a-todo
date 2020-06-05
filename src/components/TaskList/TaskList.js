@@ -4,6 +4,7 @@ import Filters from '../../components/Filters/Filters';
 import { TodoContext } from '../../context/todo.context';
 import Button from '../../components/Button/Button';
 import Progress from '../../components/Progress/Progress';
+import ToDoListTitle from '../EditableOnClick/EditableOnClick';
 import css from './TaskList.module.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -12,14 +13,15 @@ library.add(faPlus, faSearch, faSpinner);
 
 const TaskList = (props) => {
    const [search, setSearch] = useState();
+   const [editable, setEditable] = useState();
    const [filter, setFilter] = useState('ALL');
    const [toDoLists, handlers] = useContext(TodoContext);
 
-   // const filter = filters[0];
    const toDoList = toDoLists.find(item => item.id === props.id);
    const tasks = toDoList.tasks;
    const {
-      addTask
+      addTask,
+      updateToDoListTitle
    } = handlers || {};
 
    const keyUp = (e) => {
@@ -30,6 +32,10 @@ const TaskList = (props) => {
       setFilter(f);
    }
 
+   const doSave = (e) => {
+      setEditable(false);
+      updateToDoListTitle(props.id, e.target.value);
+   }   
 
    const searchedTasks = search ? tasks.filter(item => {
       return item.title.toLowerCase().includes(search.toLowerCase())
@@ -67,36 +73,23 @@ const TaskList = (props) => {
 
    const savedTasks = tasks.filter(item => item.saved).length;
 
-   // const postList = posts.length > 0? 
-   // <div>
-   //    <h4>Posts</h4>
-   //    <ul>
-   //       {posts.map(item => <li key={item.id}>{item.title}</li>)}
-   //    </ul>
-   // </div>
-   // : 
-   // <div className="text-center">
-   //    <FontAwesomeIcon icon="spinner" spin /> Loading posts…
-   // </div>
-
    return (
-      <section className={css.taskListModule}>
-         {
-            // toDoLists.length > 1 &&
-            <Button color="link" icon="times" className={css.closeButton} onClick={() => handlers.removeToDoList(props.id)} />
-         }
+      <section className={css.toDoListModule}>
+         <Button color="link" icon="times" className={css.closeButton} onClick={() => handlers.removeToDoList(props.id)} />
          {
             savedTasks > 0 &&
             <Progress id={props.id} />
          }
-         <h3>
-            {toDoList.title}
-            {
-               taskCount > 0 &&
-               <span> ({taskCount})</span>
-            }
+         <header className={css.toDoListHeader}>
+            <h3>
+               <ToDoListTitle editable={editable} handlers={{doSave: doSave, setEditable: setEditable}} {...toDoList} />
+               {
+                  taskCount > 0 && !editable &&
+                  <span> ({taskCount})</span>
+               }
+            </h3>
             <Button color="primary" circle onClick={() => addTask(props.id)} icon="plus" title="Add task" className={css.addButton}></Button>
-         </h3>
+         </header>
          {
             savedTasks > 1 &&
             <div className={css.searchBox}>
@@ -126,8 +119,6 @@ const TaskList = (props) => {
                {taskList}
             </ul>
          </div>
-         {/* {postList} */}
-
       </section>
    )
 }

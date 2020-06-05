@@ -1,0 +1,11 @@
+@import "../../theme.scss";
+:export { primary: $primary; }
+
+.taskCompleted{
+   text-decoration: line-through;
+   color: #777777;
+   font-weight: normal
+}
+.pointer{
+   cursor: pointer;
+}

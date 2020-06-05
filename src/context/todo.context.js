@@ -55,8 +55,8 @@ const TodoContextProvider = (props) => {
          return item;
       });
 
-      const allActive = newTasks.every(item => !item.completed);
-      const allCompleted = newTasks.every(item => item.completed);
+      // const allActive = newTasks.every(item => !item.completed);
+      // const allCompleted = newTasks.every(item => item.completed);
 
       toDoLists[toDoListIndex].tasks = newTasks;
       setToDoLists([...toDoLists]);      
@@ -101,6 +101,13 @@ const TodoContextProvider = (props) => {
       // setTasks(newTasks);
    }
 
+   const updateToDoListTitle = (id, title) => {
+      const toDoListIndex = getToDoListIndex(id); 
+      toDoLists[toDoListIndex].title = title;
+      toDoLists[toDoListIndex].saved = true;
+      setToDoLists([...toDoLists]);           
+   }
+
    useEffect(() => {
       //if (toDoLists.length === 0) addToDoList();
        localStorage.setItem('toDoLists', JSON.stringify(toDoLists));
@@ -121,7 +128,8 @@ const TodoContextProvider = (props) => {
                   addTask: addTask, 
                   save: save,
                   addToDoList: addToDoList,
-                  removeToDoList: removeToDoList
+                  removeToDoList: removeToDoList,
+                  updateToDoListTitle: updateToDoListTitle
                }
             ]
       }>

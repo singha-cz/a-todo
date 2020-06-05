@@ -1,6 +1,6 @@
 @import "../../theme.scss";
 
-.taskListModule{
+.toDoListModule{
    @include soft-raised(10px);
    padding: 2rem 3rem 3rem;
    flex: 1 0 18%;
@@ -17,6 +17,12 @@
    border-bottom: 1px solid #e6e6e6;
    padding-bottom: 0.8rem;
    padding-top: 0.4rem;
+}
+
+.toDoListHeader{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
 .addButton{
    margin-left: 1rem;
