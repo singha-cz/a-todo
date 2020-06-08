@@ -8,6 +8,7 @@ A simple React To-do list app based on React.js functional components and Contex
 - Keyboard support (Esc, Enter, Tab)
 - Soft UI design
 - Themeable (via Sass)
+- Multiple to-do lists
 
 ## Demo
 https://singha-cz.github.io/a-todo/
