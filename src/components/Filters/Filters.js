@@ -13,6 +13,8 @@ const Filters = (props) => {
    const [filter, doFilter] = props.filters || {};
    const tasks = toDoLists.find(item => item.id === props.id).tasks;
    const activeTasks = tasks.filter(item => !item.completed);
+   const completedTasks = tasks.length - activeTasks.length;
+
    return <div className={css.filters}>
       <ButtonGroup>
          <Button 
@@ -21,7 +23,7 @@ const Filters = (props) => {
             color={filter === "ALL" ? "dark" : "secondary"} 
             onClick={() => doFilter("ALL")}
          >
-            All tasks
+            All tasks <span className={css.filterTextBadge}>({tasks.length})</span>
             </Button><Button 
             active={filter === "ACTIVE"} 
             outline 
@@ -36,7 +38,7 @@ const Filters = (props) => {
             color={filter === "COMPLETED" ? "dark" : "secondary"} 
             onClick={() => doFilter("COMPLETED")}
          >
-            Completed
+            Completed <span className={css.filterTextBadge}>({completedTasks})</span>
          </Button>
       </ButtonGroup>
    </div>
