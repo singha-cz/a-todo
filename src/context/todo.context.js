@@ -108,26 +108,55 @@ const TodoContextProvider = (props) => {
       setToDoLists([...toDoLists]);           
    }
 
-   const exportJSON = () => {
-      var content = JSON.stringify(toDoLists, null, 2);
+   const exportJSON = (id) => {
+      const data = id? toDoLists.find(item => item.id === id): toDoLists;
+      const content = JSON.stringify(data, null, 2);
       var x = window.open();
       x.document.open();
       x.document.write('<html><body><pre>' + content + '</pre></body></html>');
       x.document.close();      
    }
-
-   const importJSON = () => {
-      // todo
+   
+   const importJSON = (id) => {
+      const fileSelector = document.createElement('input');
+      fileSelector.setAttribute('type', 'file');
+      fileSelector.setAttribute('multiple', 'multiple');
+      fileSelector.click();
+      fileSelector.addEventListener("change", (e) => handleImport(e, id));
+      ///setToDoLists([...data]);
    }
-
+   
+   const handleImport = (e, id) => {
+      if (e) {
+         const now = Date.now();         
+         const file = e.target.files[0];
+         var reader = new FileReader();
+         reader.readAsText(file, "UTF-8");
+         reader.onload = (evt) => {
+            const toDoListIndex = getToDoListIndex(id);            
+            try{
+               const newToDoLists = [...toDoLists];
+               const newToDoList = JSON.parse(evt.target.result);
+               newToDoList.id = now;
+               newToDoList.created = now;
+               newToDoLists[toDoListIndex] = newToDoList;
+               console.log(newToDoList)
+               setToDoLists([...newToDoLists]);
+            }
+            catch(err){
+               console.error(err, "Error importing JSON file:", file.name)
+            }
+         }
+         reader.onerror = (evt) => {
+            console.error("Error importing JSON:", file.name)
+         }
+      }
+   }
+   
    useEffect(() => {
       //if (toDoLists.length === 0) addToDoList();
        localStorage.setItem('toDoLists', JSON.stringify(toDoLists));
    }, [toDoLists]);      
-
-   // const doFilter = (f) => {
-   //    setFilter(f);
-   // }
 
    return (
       <TodoContext.Provider value={

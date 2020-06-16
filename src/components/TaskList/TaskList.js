@@ -21,7 +21,7 @@ const TaskList = (props) => {
    const [toDoLists, handlers] = useContext(TodoContext);
 
    const toDoList = toDoLists.find(item => item.id === props.id);
-   const tasks = toDoList.tasks;
+   const tasks = toDoList.tasks || [];
    const {
       addTask,
       updateToDoListTitle
@@ -46,12 +46,12 @@ const TaskList = (props) => {
 
    const exportJSON = () => {
       setMenu(false);
-      handlers.exportJSON();
+      handlers.exportJSON(toDoList.id);
    }
 
    const importJSON = () => {
       setMenu(false);
-      handlers.importJSON();
+      handlers.importJSON(toDoList.id);
    }
 
    const searchedTasks = search ? tasks.filter(item => {
@@ -81,7 +81,6 @@ const TaskList = (props) => {
       return ft;
    }
    const filteredTasks = filterTasks(filter, searchedTasks);
-
    const taskCount = filteredTasks.length;
    const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} toDoListId={props.id} />) : [];
 

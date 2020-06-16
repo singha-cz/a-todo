@@ -7,6 +7,11 @@ const PopupMenu = ({exportJSON, importJSON}) => {
             id: "export"
             , label: "Export JSON"
             , action: exportJSON
+        },
+        {
+            id: "import"
+            , label: "Import JSON"
+            , action: importJSON
         }
     ];
     const items = menuItems.map(item => <li key={item.id}><a href="#" onClick={item.action}>{item.label}</a></li>);
