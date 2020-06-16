@@ -108,6 +108,18 @@ const TodoContextProvider = (props) => {
       setToDoLists([...toDoLists]);           
    }
 
+   const exportJSON = () => {
+      var content = JSON.stringify(toDoLists, null, 2);
+      var x = window.open();
+      x.document.open();
+      x.document.write('<html><body><pre>' + content + '</pre></body></html>');
+      x.document.close();      
+   }
+
+   const importJSON = () => {
+      // todo
+   }
+
    useEffect(() => {
       //if (toDoLists.length === 0) addToDoList();
        localStorage.setItem('toDoLists', JSON.stringify(toDoLists));
@@ -129,26 +141,12 @@ const TodoContextProvider = (props) => {
                   save: save,
                   addToDoList: addToDoList,
                   removeToDoList: removeToDoList,
-                  updateToDoListTitle: updateToDoListTitle
+                  updateToDoListTitle: updateToDoListTitle,
+                  exportJSON: exportJSON,
+                  importJSON: importJSON
                }
             ]
       }>
-      {/* <TodoContext.Provider value={[
-         tasks
-         , {
-            setState: setTasks, 
-            remove: remove, 
-            complete: complete, 
-            addTask: addTask, 
-            save: save,
-            doFilter: doFilter,
-            addToDoList: addToDoList,
-            removeToDoList: removeToDoList
-         }
-         , filter
-         // , posts
-         , toDoLists
-      ]}> */}
          {props.children}
       </TodoContext.Provider>
    );

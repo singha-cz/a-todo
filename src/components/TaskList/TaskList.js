@@ -7,14 +7,17 @@ import Progress from '../../components/Progress/Progress';
 import ToDoListTitle from '../EditableOnClick/EditableOnClick';
 import css from './TaskList.module.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faSearch, faSpinner, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-library.add(faPlus, faSearch, faSpinner);
+import PopupMenu from '../../components/PopupMenu/PopupMenu';
+
+library.add(faPlus, faSearch, faSpinner, faEllipsisV);
 
 const TaskList = (props) => {
    const [search, setSearch] = useState();
    const [editable, setEditable] = useState();
    const [filter, setFilter] = useState('ALL');
+   const [menu, setMenu] = useState(false);
    const [toDoLists, handlers] = useContext(TodoContext);
 
    const toDoList = toDoLists.find(item => item.id === props.id);
@@ -36,6 +39,20 @@ const TaskList = (props) => {
       setEditable(false);
       updateToDoListTitle(props.id, e.target.value);
    }   
+
+   const toggleMenu = () => {
+      setMenu(!menu);
+   }
+
+   const exportJSON = () => {
+      setMenu(false);
+      handlers.exportJSON();
+   }
+
+   const importJSON = () => {
+      setMenu(false);
+      handlers.importJSON();
+   }
 
    const searchedTasks = search ? tasks.filter(item => {
       return item.title.toLowerCase().includes(search.toLowerCase())
@@ -75,11 +92,17 @@ const TaskList = (props) => {
 
    return (
       <section className={css.toDoListModule}>
+         <Button color="link" icon="ellipsis-v" className={css.moreButton} onClick={toggleMenu} />
          <Button color="link" icon="times" className={css.closeButton} onClick={() => handlers.removeToDoList(props.id)} />
+         {
+            menu &&
+            <PopupMenu exportJSON={exportJSON} importJSON={importJSON} />
+         }
          {
             savedTasks > 0 &&
             <Progress id={props.id} />
          }
+
          <header className={css.toDoListHeader}>
             <h3>
                <ToDoListTitle editable={editable} handlers={{doSave: doSave, setEditable: setEditable}} {...toDoList} />
