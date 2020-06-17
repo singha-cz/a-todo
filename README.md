@@ -9,6 +9,8 @@ A simple React To-do list app based on React.js functional components and Contex
 - Soft UI design
 - Themeable (via Sass)
 - Multiple to-do lists
+- Export/Import JSON
+- Responsive grid
 
 ## Demo
 https://singha-cz.github.io/a-todo/
