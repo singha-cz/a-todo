@@ -108,14 +108,37 @@ const TodoContextProvider = (props) => {
       setToDoLists([...toDoLists]);           
    }
 
-   const exportJSON = (id) => {
-      const data = id? toDoLists.find(item => item.id === id): toDoLists;
+   const exportJSONtoFile = (id) => {
+      let data = toDoLists;
+      let filename = "atodolist.json";
+      if (id){
+         data = toDoLists.find(item => item.id === id);
+         const newFileName = data.title.replace(/\s+/g, '-').toLowerCase();
+         filename = `${newFileName}.json`; 
+      }
       const content = JSON.stringify(data, null, 2);
-      var x = window.open();
-      x.document.open();
-      x.document.write('<html><body><pre>' + content + '</pre></body></html>');
-      x.document.close();      
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(content));
+      pom.setAttribute('download', filename);
+  
+      if (document.createEvent) {
+          var event = document.createEvent('MouseEvents');
+          event.initEvent('click', true, true);
+          pom.dispatchEvent(event);
+      }
+      else {
+          pom.click();
+      } 
    }
+
+   // const exportJSON = (id) => {
+   //    const data = id? toDoLists.find(item => item.id === id): toDoLists;
+   //    const content = JSON.stringify(data, null, 2);
+   //    var x = window.open();
+   //    x.document.open();
+   //    x.document.write('<html><body><pre>' + content + '</pre></body></html>');
+   //    x.document.close();      
+   // }
    
    const importJSON = (id) => {
       const fileSelector = document.createElement('input');
@@ -171,7 +194,7 @@ const TodoContextProvider = (props) => {
                   addToDoList: addToDoList,
                   removeToDoList: removeToDoList,
                   updateToDoListTitle: updateToDoListTitle,
-                  exportJSON: exportJSON,
+                  exportJSON: exportJSONtoFile,
                   importJSON: importJSON
                }
             ]

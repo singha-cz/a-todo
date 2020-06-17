@@ -95,7 +95,7 @@ const TaskList = (props) => {
          <Button color="link" icon="times" className={css.closeButton} onClick={() => handlers.removeToDoList(props.id)} />
          {
             menu &&
-            <PopupMenu exportJSON={exportJSON} importJSON={importJSON} />
+            <PopupMenu exportJSON={exportJSON} importJSON={importJSON} id={props.id} />
          }
          {
             savedTasks > 0 &&
