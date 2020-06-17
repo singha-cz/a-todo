@@ -1,12 +1,18 @@
 @import "../../theme.scss";
 .toDoLists{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    grid-gap: 1rem;
 }
+// .toDoLists{
+//     display: flex;
+//     flex-wrap: wrap;
+// }
 
 .addToDoList{
     position: fixed;
     right: 0;
+    top: 1rem;
     border-radius: 50%;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -14,4 +20,5 @@
     background: #cccccc;
     padding: 0.3rem;
     box-shadow: 0 1px 6px rgba(0,0,0,0.5);    
+    z-index: 1;
 }
