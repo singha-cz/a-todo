@@ -5,7 +5,14 @@
    color: #333;
    list-style: none;
    padding-left: 1em;
-   font-weight: bold
+   font-weight: bold;
+   div{
+      display: flex;
+      align-items: flex-start;
+      button{
+         margin-right: 0.4rem
+      }
+   }
 }
 .remove{
    display: none;
