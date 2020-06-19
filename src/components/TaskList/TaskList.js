@@ -129,7 +129,7 @@ const TaskList = (props) => {
             </div>
          }
          {
-            savedTasks > 1 && !allCompleted && !allActive &&
+            // savedTasks > 1 && !allCompleted && !allActive &&
             <Filters id={props.id} filters={[filter, doFilter]} />
          }
          <div>

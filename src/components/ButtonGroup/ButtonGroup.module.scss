@@ -25,6 +25,10 @@
   &>button:last-child{
     padding-right: 0.8rem;
   }
+
+  button{
+    flex-grow: 1
+  }
 }
 
   
