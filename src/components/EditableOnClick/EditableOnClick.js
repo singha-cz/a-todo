@@ -10,6 +10,7 @@ const EditableOnClick = (props) => {
         , saved = false
         , editable = false
         , handlers = {}
+        , toDoListId
      } = props || {};
 
      const {
@@ -26,7 +27,7 @@ const EditableOnClick = (props) => {
         const code = e.keyCode;
         if (code === 13) doSave(e, id);
         if (code === 27) {
-           if (!saved) remove(id);
+           if (!saved) remove(id, toDoListId);
               else setEditable(false);
         }
      }

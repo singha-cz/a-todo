@@ -84,8 +84,8 @@ const TaskList = (props) => {
    const taskCount = filteredTasks.length;
    const taskList = filteredTasks.length > 0 ? filteredTasks.map(item => <Task {...item} key={item.id} toDoListId={props.id} />) : [];
 
-   const allActive = tasks.every(item => !item.completed);
-   const allCompleted = tasks.every(item => item.completed);   
+   // const allActive = tasks.every(item => !item.completed);
+   // const allCompleted = tasks.every(item => item.completed);   
 
    const savedTasks = tasks.filter(item => item.saved).length;
 
